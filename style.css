@@ -1,0 +1,36 @@
+body {
+  background-color: rgba(121, 121, 121, 0.885);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  width: 600px;
+  }
+
+  .placek {
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    width: 200px;
+    height: 200px;
+    background-image: url("tree.jpeg");
+    background-size: cover;
+  }
+
+  div.cow {background-image: url("cow.jpeg");}
+  div.Lulu {background-image: url("Lulu.jpeg");}
+  div.monkey {background-image: url("monkey.jpeg");}
+  div.donkey {background-image: url("donkey.jpeg");}
+
+  div.tree {
+    background-image: url("tree.jpeg");
+    background-size: cover;
+  }
