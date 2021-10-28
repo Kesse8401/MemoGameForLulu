@@ -34,3 +34,7 @@ body {
     background-image: url("tree.jpeg");
     background-size: cover;
   }
+
+  div.hidden {
+    visibility: hidden;
+  }

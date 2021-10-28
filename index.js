@@ -1,77 +1,58 @@
-const tier_1 = document.getElementById('tier-1')
-const tier_2 = document.getElementById('tier-2')
-const tier_3 = document.getElementById('tier-3')
-const tier_4 = document.getElementById('tier-4')
-const tier_5 = document.getElementById('tier-5')
-const tier_6 = document.getElementById('tier-6')
-const tier_7 = document.getElementById('tier-7')
-const tier_8 = document.getElementById('tier-8')
+const container = document.querySelector('.container')
 
-let typeOfTile;
+let whatWasClicked = []
 
-
-
-tier_1.addEventListener('click', e => {
-    tier_1.classList.add('cow')
-    typeOfTile = 'cow'
-    setTimeout(b => {
-        console.log("Hello");
-        tier_1.classList.add('tree');
-        typeOfTile = undefined;
-    }, 2000);
-})
-
-tier_2.addEventListener('click', e => {
-    tier_2.classList.add('Lulu')
-    setTimeout(b => {
-        tier_2.classList.add('tree');
-    }, 2000);
-})
-
-tier_3.addEventListener('click', e => {
-    tier_3.classList.add('monkey')
-    setTimeout(b => {
-        tier_3.classList.add('tree');
-    }, 2000);
-})
-
-tier_4.addEventListener('click', e => {
-    tier_4.classList.add('Lulu')
-    setTimeout(b => {
-        tier_4.classList.add('tree');
-    }, 2000);
-})
-
-tier_5.addEventListener('click', e => {
-    tier_5.classList.add('donkey')
-    setTimeout(b => {
-        tier_5.classList.add('tree');
-    }, 2000);
-})
+const containerClickHandler = (e) => {
+    const clickedTileReference = e.target
+    const clickedTileType = clickedTileReference.getAttribute('data-tileType')
+    whatWasClicked.push(clickedTileReference)
+    clickedTileReference.classList.add(clickedTileType)
+    //if id of the tile clicked twice is the same bringBackTree()
+   
+    if (whatWasClicked.length === 2 && whatWasClicked[0].getAttribute('id') !== whatWasClicked[1].getAttribute('id')
+        && whatWasClicked[0].getAttribute('data-tileType') === whatWasClicked[1].getAttribute('data-tileType')) {
+        hideTheTiles(clickedTileType)
+        whatWasClicked = []
+    } else if (whatWasClicked.length === 2 && whatWasClicked[0] !== whatWasClicked[1]) {
+        setTimeout(bringBackTree, 2000, whatWasClicked)
+        whatWasClicked = []
+    }
+    
+}
 
 
-tier_6.addEventListener('click', e => {
-    tier_6.classList.add('cow')
-    if(typeOfTile === 'cow') {
-        console.log('uuiii')
-    } 
-    setTimeout(b => {
-        tier_6.classList.add('tree');
-    }, 2000);
-})
+
+const bringBackTree = (domNodesReferences) => {
+    for (let i = 0; i < domNodesReferences.length; i++) {
+        const currentElement = domNodesReferences[i]
+        const currentElementType = currentElement.getAttribute('data-tileType')
+        currentElement.classList.remove(currentElementType)
+    }  
+}
+
+container.addEventListener('click', containerClickHandler)
+
+const hideTheTiles = (whichType) => {
+    const arrayOfTwo = document.querySelectorAll(`div[data-tileType="${whichType}"]`);
+    for (let i = 0; i < arrayOfTwo.length; i++) {
+        let arrayElement = arrayOfTwo[i];
+        arrayElement.classList.add('hidden')
+    }
+}
 
 
-tier_7.addEventListener('click', e => {
-    tier_7.classList.add('donkey')
-    setTimeout(b => {
-        tier_7.classList.add('tree');
-    }, 2000);
-})
 
-tier_8.addEventListener('click', e => {
-    tier_8.classList.add('monkey')
-    setTimeout(b => {
-        tier_8.classList.add('tree');
-    }, 2000);
-})
+
+
+
+
+// if two clicks in a row has the same data-tileType they should dissapear
+
+// const classRemover = (e) => {
+//     const clickedTileReference = e.target
+//     const clickedTileType = clickedTileReference.getAttribute('data-tileType')
+//     clickedTileReference.classList.remove(clickedTileType)
+// }
+
+
 
